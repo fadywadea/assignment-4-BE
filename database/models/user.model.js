@@ -1,5 +1,6 @@
 import { sequelize } from "../dbConnection.js";
 import { DataTypes } from 'sequelize';
+// import { noteModel } from "./note.model.js";
 
 export const userModel = sequelize.define('user', {
   id: {
@@ -13,7 +14,6 @@ export const userModel = sequelize.define('user', {
   },
   email: {
     type: DataTypes.STRING(255),
-    // unique: true,
     allowNull: false
   },
   password: {
@@ -25,3 +25,10 @@ export const userModel = sequelize.define('user', {
     allowNull: false
   }
 });
+
+// export let userSchema = userModel.hasMany(noteSchema, {
+//   foreignKey: 'user_id',
+//   as: 'note'
+// });
+
+sequelize.sync();
