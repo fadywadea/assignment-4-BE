@@ -1,8 +1,23 @@
 import express from 'express';
-import { getAllNotes } from './note.controller.js';
+import { addNote, deleteNote, getAllNotes, getAllNotesWUsers , updateNote } from './note.controller.js';
 
-const noteRouter = express.Router();
+const router = express.Router();
 const baseUrl = "/note";
-noteRouter.get(baseUrl, getAllNotes)
 
-export default noteRouter;
+
+// Get all notes
+router.get(baseUrl, getAllNotes);
+
+// Add new note
+router.post(`${baseUrl}/:userId`, addNote);
+
+// Delete note
+router.delete(`${baseUrl}/:id`, deleteNote);
+
+// Update note
+router.patch(`${baseUrl}/:id`, updateNote);
+
+// Get all notes with their owners
+router.get('/ownersNotes', getAllNotesWUsers);
+
+export default router;

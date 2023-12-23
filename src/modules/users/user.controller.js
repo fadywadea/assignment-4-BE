@@ -39,11 +39,6 @@ export const signIn = async (req, res) => {
         password
       }
     });
-
-    // console.log(user[0].email, user[0].password);
-    // console.log(email, password);
-
-    // if  user put invalid email or password
     console.log(user[0])
     user.length > 0 ?
       res.status(200).json({ message: `welcome ${user[0].dataValues.name} at API` })
@@ -119,7 +114,7 @@ export const searchUser = async (req, res) => {
   }
 }
 
-//! search for user where his age is between 20 and 30
+// search for user where his age is between 20 and 30
 export const searchUserAge = async (req, res) => {
   try {
     let searchAge = await userModel.findAll(
