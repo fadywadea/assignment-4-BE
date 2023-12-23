@@ -39,12 +39,11 @@ export const signIn = async (req, res) => {
         password
       }
     });
-    console.log(user[0])
     user.length > 0 ?
-      res.status(200).json({ message: `welcome ${user[0].dataValues.name} at API` })
-        : !user[0]?
+      res.status(200).json({ message: `welcome ${user[0].dataValues.name} at API` }) :
+      !user ?
         res.status(401).json({ message: "Wrong email" })
-        :res.status(401).json({ message: "Wrong email" })
+        : res.status(401).json({ message: "Wrong password" })
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: `Error in server: ${e}` });
