@@ -35,15 +35,15 @@ export const signIn = async (req, res) => {
     const { email, password } = req.body;
     const user = await userModel.findAll({
       where: {
-        email,
-        password
+        email: email,
+        password: password
       }
     });
-    user.length > 0 ?
-      res.status(200).json({ message: `welcome ${user[0].dataValues.name} at API` }) :
-      !user ?
+    !user ?
+      res.status(401).json({ message: "Wrong password" }) :
+      !user.length ?
         res.status(401).json({ message: "Wrong email" })
-        : res.status(401).json({ message: "Wrong password" })
+        : res.status(200).json({ message: `welcome ${user[0].dataValues.name} at API` })
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: `Error in server: ${e}` });
