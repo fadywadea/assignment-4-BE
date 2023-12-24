@@ -33,17 +33,12 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await userModel.findAll({
-      where: {
-        email: email,
-        password: password
-      }
-    });
-    !user ?
-      res.status(401).json({ message: "Wrong password" }) :
-      !user.length ?
-        res.status(401).json({ message: "Wrong email" })
-        : res.status(200).json({ message: `welcome ${user[0].dataValues.name} at API` })
+    const user = await userModel.findOne({ where: { email } });
+    user ?
+      user.dataValues.password == password ?
+        res.status(200).json(`welcome ${user.dataValues.name}`) :
+        res.status(401).json('password is incorrect!') :
+      res.status(404).json({ message: 'Invalid email' });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: `Error in server: ${e}` });
@@ -146,5 +141,5 @@ export const findByListOfIds = async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: `Error in server: ${e}` });
-  };
-}
+  }
+};
