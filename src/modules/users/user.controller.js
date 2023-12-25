@@ -144,7 +144,7 @@ export const findByListOfIds = async (req, res) => {
   }
 };
 
-// Get the oldest 3 users using sequelize?
+// Get the oldest 3
 export const oldestUsers = async (req, res) => {
   const oldestUser = await userModel.findAll({
     limit: 3,
