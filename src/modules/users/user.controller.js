@@ -143,3 +143,12 @@ export const findByListOfIds = async (req, res) => {
     res.status(500).json({ message: `Error in server: ${e}` });
   }
 };
+
+// Get the oldest 3 users using sequelize?
+export const oldestUsers = async (req, res) => {
+  const oldestUser = await userModel.findAll({
+    limit: 3,
+    order: [['age', 'DSC']]
+  });
+  res.status(200).json({ message: "Oldest users", oldestUser });
+};

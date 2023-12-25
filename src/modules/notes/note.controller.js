@@ -82,6 +82,7 @@ export const updateNote = async (req, res) => {
   }
 };
 
+// Get all notes with owner
 export const getAllNotesWUsers = async (req, res) => {
   try {
     const getAllNotesWUsers = await noteModel.findAll({
@@ -95,4 +96,4 @@ export const getAllNotesWUsers = async (req, res) => {
     console.log("Error: ", e);
     return res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};

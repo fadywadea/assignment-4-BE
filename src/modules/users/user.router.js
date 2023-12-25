@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteUser, findByListOfIds, getAllUsers, searchUser, searchUserAge, signIn, signUp, updateUser } from './user.controller.js';
+import { deleteUser, findByListOfIds, getAllUsers, oldestUsers, searchUser, searchUserAge, signIn, signUp, updateUser } from './user.controller.js';
 
 const router = express.Router();
 const baseUrl = "/user";
@@ -14,12 +14,15 @@ router.route('/user/:id').put(updateUser).delete(deleteUser);
 router.post('/user/signin', signIn);
 
 // searchUser
-router.get('/searchUser', searchUser)
+router.get('/searchUser', searchUser);
 
 // search for users by list of ids
-router.post('/userId', findByListOfIds)
+router.post('/userId', findByListOfIds);
 
 //search for user where his age is between 20 and 30
-router.get('/searchUserAge', searchUserAge)
+router.get('/searchUserAge', searchUserAge);
+
+// Get the oldest 3 users
+router.get('/oldestUsers', oldestUsers);
 
 export default router;
